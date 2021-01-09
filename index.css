@@ -1,0 +1,45 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#fullbody{
+   width: 50vw;
+   height: 55vh;
+   margin: auto;
+   margin-top: 2rem;
+   border: 1px solid silver;
+   border-radius: 2rem;
+   background-color: silver;
+   padding: 0.5rem;
+   padding-bottom: 2rem;
+}
+#show{
+   height: 4rem;
+   background-color: rgba(0, 0, 0, 0.253);
+   margin-bottom: 1rem;
+   font-size: 2rem;
+   padding-top: 2rem;
+   border-radius: 1rem;
+   /* cursor: auto; */
+}
+#btnbody{
+    height: fit-content;
+    display:grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(4,auto);
+    grid-template-rows: repeat(4,auto);
+}
+.btn{
+    font-size: 2rem;
+    cursor: pointer;
+    border: 1px solid black;
+    border-radius: 0.3rem;
+}
+.btn:hover{
+    background-color:dimgrey;
+    color: white;
+}
+.btn:active{
+    background-color: green;
+    border: 1px solid green;
+}
