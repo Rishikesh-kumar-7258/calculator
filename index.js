@@ -1,10 +1,11 @@
-console.log("You can do it!");
+// The function can be made directly using a function in javascript but I am trying to developmy own algorith for this ProcessingInstruction.
+
+// console.log("You can do it!");
 
 function appear(e) {
     let area = document.getElementById("show");
     if (e == '') area.innerText = e;
     else area.innerText += e;
-    // console.log(e);
 }
 
 function del() {
@@ -14,41 +15,72 @@ function del() {
     area.innerText = s.substr(0, s.length - 1);
 }
 
-function isdigit(c) {
-    let n = c - '0';
-    if (n >= 0 && n <= 9) return true;
-    return false;
-}
-
 function solve() {
     let area = document.getElementById("show");
     let equation = area.innerText;
+    area.innerText = solveme(equation);
+}
 
-    let numarr = [],signarr = [];
-    let curr = 0;
-    for (i = 0; i < equation.length; i++) {
+function solveme(s)
+{
+    let  arr = ['/', 'x', '+', '-'];
 
-        if (!isdigit(equation[i])) {
-            signarr.push(equation[i])
-            numarr.push(curr);
-            curr = 0;
-            continue;
+    let num = [], sign = [];
+
+    let i = 0, j = 0, n = s.length;
+    let flag = false;
+    if (s[j] == '-')
+    {
+        flag = true;
+        i = j = 1;
+    }
+
+    while (j < n && i < n)
+    {
+        if (arr.includes(s[j]))
+        {
+            let a = parseFloat(s.substring(i,j));
+            if (flag) 
+            {
+                a *= -1;
+                flag = 0;
+            }
+            num.push(a);
+            sign.push(s[j]);
+            i = j + 1;
         }
 
-        let n = equation[i] - '0';
-        curr = (curr*10) + n;
-        // console.log(equation[i]);
-    }
-    numarr.push(curr);
-
-    let ans = numarr[0];
-    for( i=1; i<numarr.length; i++){
-        let sign = signarr[i-1],num = numarr[i];
-        if(sign == '+') ans += num;
-        else if(sign == '-') ans -= num;
-        else if(sign == 'x') ans *= num;
-        else if(sign == '/') ans /= num;
+        j++;
     }
 
-    area.innerText = ans;
+    let a = parseFloat(s.substring(i,j));
+    num.push(a);
+
+    let ans = num[0];
+    for( i=1, len = num.length; i < len; i++){
+        let operator = sign[i-1];
+        let number = num[i];
+
+        switch (operator)
+        {
+            case '+':
+                ans += number;
+                break;
+            case '-':
+                ans -= number;
+                break;
+            case 'x':
+                ans *= number;
+                console.log(ans);
+                break;
+            case '/':
+                ans /= number;
+                break;
+            default:
+                continue;
+        }
+    }
+
+    return ans;
+
 }

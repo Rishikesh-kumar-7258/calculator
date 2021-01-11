@@ -1,45 +1,97 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-#fullbody{
-   width: 50vw;
-   height: 55vh;
-   margin: auto;
-   margin-top: 2rem;
-   border: 1px solid silver;
-   border-radius: 2rem;
-   background-color: silver;
-   padding: 0.5rem;
-   padding-bottom: 2rem;
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[12];
+      grid-template-columns: repeat(12, 1fr);
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: cadetblue;
+  gap: 1rem;
+  overflow: auto;
 }
-#show{
-   height: 4rem;
-   background-color: rgba(0, 0, 0, 0.253);
-   margin-bottom: 1rem;
-   font-size: 2rem;
-   padding-top: 2rem;
-   border-radius: 1rem;
-   /* cursor: auto; */
+
+#fullbody {
+  height: 70vh;
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 6;
+  grid-column: 4 / span 6;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+  -ms-grid-rows: (1fr)[8];
+      grid-template-rows: repeat(8, 1fr);
+  border: 1px solid black;
+  padding: 0.5rem;
+  background-color: silver;
+  gap: 1rem 0;
+  -webkit-box-shadow: 2px 2px 4px black;
+          box-shadow: 2px 2px 4px black;
 }
-#btnbody{
-    height: fit-content;
-    display:grid;
-    gap: 0.5rem;
-    grid-template-columns: repeat(4,auto);
-    grid-template-rows: repeat(4,auto);
+
+#fullbody #show {
+  background-color: gray;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  font-size: 2rem;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1/span 2;
+  padding-top: 4vh;
+  -webkit-box-shadow: 2px 2px 4px black;
+          box-shadow: 2px 2px 4px black;
 }
-.btn{
-    font-size: 2rem;
-    cursor: pointer;
-    border: 1px solid black;
-    border-radius: 0.3rem;
+
+#fullbody #btnbody {
+  border-radius: 0.5rem;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 7;
+  grid-row: 3 / span 7;
+  grid-column: span 4;
+  display: -ms-grid;
+  display: grid;
+  gap: 0.5rem;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
 }
-.btn:hover{
-    background-color:dimgrey;
-    color: white;
+
+#fullbody #btnbody .btn {
+  border-radius: 0.5rem;
+  border: 1px solid brown;
+  font-size: 1.5rem;
+  -webkit-box-shadow: 2px 2px 4px black;
+          box-shadow: 2px 2px 4px black;
+  cursor: pointer;
 }
-.btn:active{
-    background-color: green;
-    border: 1px solid green;
+
+#fullbody #btnbody .btn:hover {
+  background-color: gainsboro;
 }
+
+@media screen and (max-width: 800px) {
+  #fullbody {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 10;
+    grid-column: 2 / span 10;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #fullbody {
+    grid-column: span 12;
+  }
+  #fullbody .btn {
+    font-size: 1rem;
+  }
+}
+/*# sourceMappingURL=index.css.map */
