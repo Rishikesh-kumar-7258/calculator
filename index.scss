@@ -22,10 +22,12 @@ body{
     grid-template-columns: 1fr;
     grid-template-rows: repeat(8,1fr);
     border: 1px solid black;
+    border-radius: 1rem;
     padding: 0.5rem;
     background-color: silver;
     gap: 1rem 0;
-    box-shadow: 2px 2px 4px black;
+    box-shadow: 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black;
+
 
     #show{
         background-color:gray;
@@ -47,17 +49,27 @@ body{
         grid-template-columns: repeat(4,1fr);
         // background-color:cornflowerblue;
         // box-shadow: 2px 2px 4px black;
+    }
 
-        .btn{
-            border-radius: 0.5rem;
-            border: 1px solid brown;
-            font-size: 1.5rem;
-            box-shadow: 2px 2px 4px black;
-            cursor:pointer;
-        }
-        .btn:hover{
-            background-color: gainsboro;
-        }
+    #new{
+        display: none;
+        border-radius: 0.5rem;
+        grid-row: 3 / span 7;
+        grid-column: span 4;
+        gap: 0.5rem;
+        grid-template-columns: repeat(4,1fr);
+    }
+
+    .btn{
+        border-radius: 0.5rem;
+        border: 1px solid brown;
+        font-size: 1.5rem;
+        box-shadow: 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black;
+        cursor:pointer;
+    }
+    .btn:hover{
+        background-color: gainsboro;
+        box-shadow: 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black ;
     }
 }
 
