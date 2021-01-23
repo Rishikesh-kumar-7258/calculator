@@ -93,6 +93,11 @@ body {
           box-shadow: 2px 2px 4px black, 2px 2px 4px black, 2px 2px 4px black;
 }
 
+#fullbody .btn:active {
+  -webkit-transform: scale(0.98);
+          transform: scale(0.98);
+}
+
 @media screen and (max-width: 800px) {
   #fullbody {
     -ms-grid-column: 2;

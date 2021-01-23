@@ -29,6 +29,10 @@ function solve(e) {
     else if (e == 'sq') answer = square(equation);
     else if (e == 'sqrt') answer = root(equation);
     else if (e == 'qb') answer = cube(equation);
+    else if (e == 'qroot') answer = cuberoot(equation);
+    else if (e == 'percent') answer = percent(equation);
+    else if (e == 'factorial') answer = factorial(equation);
+    
 
     area.innerText = answer;
 }
@@ -131,4 +135,32 @@ function cube(equation)
 {
     let number = parseFloat(equation);
     return Math.pow(number, 3);
+}
+
+//function to implement cuberoot
+function cuberoot(equation)
+{
+    let number = parseFloat(equation);
+    return Math.cbrt(number);
+}
+
+//function to find the percentage of the number
+function percent(equation)
+{
+    let number = parseFloat(equation);
+    return number*100;
+}
+
+//functionn to find the factorial of the number
+function factorial(equation)
+{
+    let number = parseFloat(equation);
+    function fact(number)
+    {
+        if (number == 1 || number == 0) return 1;
+
+        return number * fact(number - 1);
+    }
+
+    return fact(number);
 }
