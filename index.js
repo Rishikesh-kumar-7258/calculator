@@ -1,8 +1,6 @@
 // The function can be made directly using a function in javascript but I am trying to developmy own algorith for this ProcessingInstruction.
 
-// console.log("You can do it!");
-
-// varaibles for the code
+// variables for the code
 let first = true;
 
 //The function to print the digits on the screeen
@@ -101,19 +99,7 @@ function open_new() {
     let old = document.getElementById("btnbody");
     let current = document.getElementById("new");
 
-    // old.style.display = "none";
-    // current.style.display = "grid"
-
-    if (first == true){
-        current.style.display = "none";
-        old.style.display = "grid";
-        first = false;
-    }
-    else{
-        old.style.display = "none";
-        current.style.display = "grid";
-        first = true;
-    }
+    console.log(old.id, current.id);
 }
 
 //The function to implement the square of a number
