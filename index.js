@@ -189,3 +189,40 @@ document.querySelector(".hamburger").addEventListener('click', function(){
         e.classList.toggle('hide');
     })
 })
+
+if (window.outerWidth <= 768)
+    {
+        options.forEach(e => {
+            if (!e.classList.contains("hide"))
+            {
+                e.classList.add("hide");
+            }
+        })
+    }
+
+    if (window.outerWidth > 768)
+    {
+        options.forEach(e => {
+            e.classList.remove("hide");
+        })
+    }
+
+window.addEventListener("resize", function(){
+
+    if (this.outerWidth <= 768)
+    {
+        options.forEach(e => {
+            if (!e.classList.contains("hide"))
+            {
+                e.classList.add("hide");
+            }
+        })
+    }
+
+    if (this.outerWidth > 768)
+    {
+        options.forEach(e => {
+            e.classList.remove("hide");
+        })
+    }
+})
