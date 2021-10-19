@@ -11,22 +11,22 @@ function solver(arr)
     // assert(n >= 1);
     
     // If the size of matrix is 1 return the only element
-    if (n == 1) return arr[0][0];
+    if (n === 1) return arr[0][0];
 
     // If the size of matrix is 2 return according to the formula
-    if (n == 2)
+    if (n === 2)
     {
         return (arr[0][0]*arr[1][1] - arr[1][0]*arr[0][1]);
     }
 
-    // Initialised ans and assigned it to 0
+    // Initialised ans and assigned to 0
     let ans = 0;
 
     // looping throgh 1 col only
     for (let i = 0; i< n; i++)
     {
         // getting to next iteration if the current element is 0
-        if (arr[i][0] == 0) continue;
+        if (arr[i][0] === 0) continue;
 
         // making a temporary variable to store the new matrix
         let temp = [];
@@ -35,7 +35,7 @@ function solver(arr)
         for (let r = 0; r < n; r++)
         {
             // if the element is present in the current row move ahead
-            if (r == i) continue;
+            if (r === i) continue;
 
             let t = [];
             for (let c = 1; c < n; c++)
@@ -46,7 +46,7 @@ function solver(arr)
             temp.push(t);
         }
 
-        ans += arr[i][0]*solver(temp)*((1&i == 0) ? 1 : -1);
+        ans += arr[i][0]*solver(temp)*Math.pow(-1, i);
     }
 
     return ans;
@@ -63,14 +63,14 @@ function list_from_equation(equation)
     {
         if (equation[i] === ' ') continue;
 
+        v += equation[i];
+
         if (equation[i] === '+' || equation[i] === '-') 
         {
-            ans.push(parseFloat(v));
+            if (v.length === 1) ans.push(1);
+            else ans.push(parseFloat(v));
             v = equation[i];
-            continue;
         }
-
-        v += equation[i];
 
     }
 
@@ -113,17 +113,53 @@ document.querySelector(".solve-btn").addEventListener('click', function()
 {
     let matrix = [];
     let constants = [];
-    let variables = [];
     
     for (let i = 0; i < num; i++)
     {
         let equation = document.querySelector(`#equation${i+1}`).value;
         let temp = list_from_equation(equation);
-        
-        matrix.push(temp.slice(0, -1));
-        constants.push(temp[temp.length - 1])
+
+        matrix.push(temp.slice(0, num));
+        constants.push(temp[num]);
     }
 
-    let  a = solver(matrix);
+    let a = solver(matrix);
+
+    answers = [];
+
+    for (let i = 0; i < num; i++)
+    {
+        let temp = [];
+        for (let i = 0; i < num; i++) temp.push(matrix[i]);
+
+        for (let j = 0; j < num; j++) temp[j][i] = constants[j];
+
+        let curr = solver(temp);
+        console.log(curr);
+
+        answers.push(curr / a);
+
+    }
+
+    for (let i = 0; i < num; i++) answers[i] = (Math.round(answers[i]*100) / 100);
+
+    document.querySelector(".answer").innerText = answers;
 
 })
+
+// 3x + 1y + 2z = 3
+// 2x - 3y - 1z = -3
+// 1x + 2y + 1z = 4
+// 1 2 -1
+
+// let a = [   [3, 1, 2],
+//             [2, -3, -1],
+//             [1, 2, 1],
+//         ];
+
+// let b = [   [3, 1, 2],
+//             [-3, -3, -1],
+//             [4, 2, 1],
+//         ];
+
+// console.log(solver(a), solver(b))
