@@ -6,10 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/d59016f14e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="index.css">
     <title>Calculator</title>
 </head>
 <body>
-    <div class="container">
+
+    <!-- navbar -->
+    <div class="container bg-dark text-white fixed-top">
+        <div class="row pt-5 p-3" id="calc-nav">
+            <div class="hamburger"><span class="fas fa-bars fs-4"></span> <span class="ham-info">Calculator</span></div>
+            <div class="col-3 active fw-bolder calc-opt">Calculator</div>
+            <div class="col-3 fw-bolder calc-opt">Solve Equation</div>
+            <div class="col-3 fw-bolder calc-opt">Exchange Rate</div>
+            <div class="col-3 fw-bolder calc-opt">Unit Converter</div>
+        </div>
+    </div>
+
+    <!-- Normal calculator -->
+    <div class="container c1 mt-5 pt-5 bg-dark pb-5">
+        <div class="row pt-5 text-white">
+            <div class="col-12 ans text-muted"><span>=</span> <span>0</span></div>
+            <div class="col-12 eq">0</div>
+        </div>
+        <div class="row bg-dark">
+            <div class="col-12 numpad pt-4" id="r1">
+                <div class="row">
+                    <div class="col-3">C</div>
+                    <div class="col-3">%</div>
+                    <div class="col-3"><span class="fas fa-backspace"></span></div>
+                    <div class="col-3"><span class="fas fa-divide"></span></div>
+                </div>
+            </div>
+            <div class="col-12 numpad" id="r2">
+                <div class="row">
+                    <div class="col-3">7</div>
+                    <div class="col-3">8</div>
+                    <div class="col-3">9</div>
+                    <div class="col-3 colored">X</div>
+                </div>
+            </div>
+            <div class="col-12 numpad" id="r3">
+                <div class="row">
+                    <div class="col-3">4</div>
+                    <div class="col-3">5</div>
+                    <div class="col-3">6</div>
+                    <div class="col-3 colored">-</div>
+                </div>
+            </div>
+            <div class="col-12 numpad" id="r4">
+                <div class="row">
+                    <div class="col-3">1</div>
+                    <div class="col-3">2</div>
+                    <div class="col-3">3</div>
+                    <div class="col-3 colored">+</div>
+                </div>
+            </div>
+            <div class="col-12 numpad" id="r5">
+                <div class="row">
+                    <div class="col-3">00</div>
+                    <div class="col-3">0</div>
+                    <div class="col-3">.</div>
+                    <div class="col-3 colored">=</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- equation-solver -->
+    <div class="container equation-solver c2 hide">
         <div class="row mt-5">
             <div class="mb-3 col-md-3 col-sm-6">
                 <label for="variables" class="form-label">Enter variable count</label>
@@ -32,6 +97,12 @@
             </div>
         </div>
     </div>
+
+    <!-- exchange rate  -->
+    <div class="container c3 hide"></div>
+
+    <!-- unit converter  -->
+    <div class="container c4 hide"></div>
 </body>
 <script src="index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>

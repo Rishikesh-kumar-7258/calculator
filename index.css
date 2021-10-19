@@ -1,0 +1,74 @@
+body{
+    background : goldenrod;
+    overflow: hidden;
+}
+.calc-opt{
+    display: grid;
+    place-items: center;
+    cursor : pointer;
+}
+.active{
+    color: goldenrod;
+    border-bottom: 4px solid goldenrod;
+}
+
+.hamburger
+{
+    display: none;
+    position: absolute;
+    color : goldenrod;
+}
+.hide{
+    display : none;
+}
+
+.eq, 
+.ans
+{
+    font-size: 32px;
+    display: flex;
+    justify-content: space-between;
+}
+.eq{
+    justify-content: end;
+    font-size: 48px;
+}
+
+.numpad > .row > div{
+    display : grid;
+    place-items: center;
+    font-weight: bolder;
+    padding : 10px;
+    color : white;
+    font-size : 24px;
+}
+
+#r1 > .row > div,
+.numpad > .row > .colored
+{
+    color : goldenrod;
+}
+
+@media (max-width : 768px)
+{
+    #calc-nav{
+        display : flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+
+    .calc-opt{
+        width : 80%;
+        padding: 10px;
+    }
+
+    .hamburger{
+        display: block;
+        top : 20px;
+        width : fit-content;
+        left : 10px;
+    }
+
+}

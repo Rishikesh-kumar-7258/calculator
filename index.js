@@ -163,3 +163,29 @@ document.querySelector(".solve-btn").addEventListener('click', function()
 //         ];
 
 // console.log(solver(a), solver(b))
+
+// ================================= First page ==========================
+let options = document.querySelectorAll(".calc-opt");
+
+options.forEach((element, index) => {
+    element.addEventListener('click', function(){
+        options.forEach((e, i) => {
+            e.classList.remove('active');
+
+            document.querySelector(`.c${i+1}`).classList.add("hide");
+        })
+
+        element.classList.add('active');
+        document.querySelector(`.c${index+1}`).classList.remove("hide");
+        document.querySelector(".ham-info").innerText = element.innerText;
+    })
+
+});
+
+document.querySelector(".hamburger").addEventListener('click', function(){
+
+    options.forEach(e => {
+        
+        e.classList.toggle('hide');
+    })
+})
