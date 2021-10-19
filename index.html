@@ -11,18 +11,18 @@
 <body>
     <div class="container">
         <div class="row mt-5">
-            <div class="row-12">
-                <div class="fs-5 text-muted text-center">convert the equations int the form of ax + by + c = d</div>
-            </div>
             <div class="mb-3 col-md-3 col-sm-6">
                 <label for="variables" class="form-label">Enter variable count</label>
-                <input type="number" class="form-control" id="variables" placeholder="1" min="1">
+                <input type="number" class="form-control" id="variables" min="2">
             </div>
             <div class="col-md-3 col-sm-6 align-self-center">
                 <button class="btn btn-success ok-btn">confirm</button>
             </div>
-            <div class="col-12">
-                <input type="text" class="form-control" id="equation1" placeholder="ax + b = c">
+            <div class="row-12">
+                <div class="fs-5 text-muted text-center">convert the equations int the form of ax + by + cz = d</div>
+            </div>
+            <div class="col-12 input-equations">
+                <input type="text" class="form-control" id="equation1" placeholder="equation1">
             </div>
             <div class="col-4">
                 <button class="btn btn-success mt-2 solve-btn">Solve</button>

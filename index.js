@@ -51,35 +51,79 @@ function solver(arr)
 
     return ans;
 }
+
+// function to convert a equation into an array of constants
+function list_from_equation(equation)
+{
+    let ans = [];
+
+    let v = "";
+    let i = -1;
+    while (equation[++i] !== '=')
+    {
+        if (equation[i] === ' ') continue;
+
+        if (equation[i] === '+' || equation[i] === '-') 
+        {
+            ans.push(parseFloat(v));
+            v = equation[i];
+            continue;
+        }
+
+        v += equation[i];
+
+    }
+
+    ans.push(parseFloat(v));
+    v = "";
+
+    while (++i < equation.length)
+    {
+        v += equation[i];
+    }
+    ans.push(parseFloat(v));
+
+    return ans;
+}
 // ====================== DOM =============
+
+// number of variables
+let num = 2
 
 document.querySelector(".ok-btn").addEventListener("click", function(){
 
-    console.log("this is working");
+    num = document.querySelector("#variables").value;
+    document.querySelector("#variables").value = "";
 
-    let num = document.querySelector("#variables").input || 1;
+    document.querySelector(".input-equations").innerHTML = "";
 
-    console.log(num)
-
-    for (let i = 1; i < num; i++)
+    for (let i = 0; i < num; i++)
     {
         let input = document.createElement("input")
         input.type = "text";
         input.classList.add("form-control");
         input.classList.add("my-2");
-        input.placeholder = "ax + b = c";
-        input.id = `equation${num}`;
-        document.querySelector("#equation1").after(input);
+        input.placeholder = `equation${i+1}`;
+        input.id = `equation${i+1}`;
+        document.querySelector(".input-equations").appendChild(input);
     }
 })
 
-// document.querySelector(".solve-btn").addEventListener('click', function()
-// {
-//     let text = document.querySelector("#equations").value;
-//     let c = '\n';
+document.querySelector(".solve-btn").addEventListener('click', function()
+{
+    let matrix = [];
+    let constants = [];
+    let variables = [];
+    
+    for (let i = 0; i < num; i++)
+    {
+        let equation = document.querySelector(`#equation${i+1}`).value;
+        let temp = list_from_equation(equation);
+        
+        matrix.push(temp.slice(0, -1));
+        constants.push(temp[temp.length - 1])
+    }
 
-//     let count = (text === '') ? 0 : 1;
-//     for (let i = 0; i < text.length; i++) if (text[i] == c) count++;
+    let  a = solver(matrix);
 
-//     document.querySelector(".answer").innerText = count;
-// })
+})
