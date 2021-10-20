@@ -264,7 +264,30 @@ num_keys.forEach(element => {
             case '=':
                 let equation = curr_screen.innerText;
                 equation = equation.replace(/x/g, '*');
-                ans_screen.innerText = eval(equation);
+                ans_screen.innerText = Math.round(eval(equation)*100) / 100;
+                break;
+            case '':
+                if (curr_screen.innerText.length === 1) curr_screen.innerText = '0';
+                else curr_screen.innerText = curr_screen.innerText.slice(0, -1);
+                break;
+            case '.':
+                if (curr_screen.innerText.includes('.')) break;
+                curr_screen.innerText += element.innerText;
+                break;
+            case '1/x':
+                let ans = 1/parseFloat(curr_screen.innerText);
+                ans_screen.innerText = Math.round(ans * 100) / 100;
+                break;
+            case 'x^2':
+                let n = parseFloat(curr_screen.innerText);
+                ans_screen.innerText = n*n;
+                break;
+            case 'sqrt':
+                ans_screen.innerText = Math.sqrt(parseFloat(curr_screen.innerText));
+                break;
+            case 'cbrt':
+                let n1 = Math.cbrt(parseFloat(curr_screen.innerText))
+                ans_screen.innerText = Math.round(n1 * 100) / 100;
                 break;
             default:
                 if (curr_screen.innerText === '0') curr_screen.innerText = element.innerText;
