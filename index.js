@@ -1,3 +1,4 @@
+// ========================== Equation solver =========================
 // function to solve the matrix
 function solver(arr)
 {
@@ -111,35 +112,48 @@ document.querySelector(".ok-btn").addEventListener("click", function(){
 
 document.querySelector(".solve-btn").addEventListener('click', function()
 {
-    let matrix = [];
-    let constants = [];
+    const matrix = [];
+    const constants = [];
     
     for (let i = 0; i < num; i++)
     {
         let equation = document.querySelector(`#equation${i+1}`).value;
+        if (equation.length === 0) return;
         let temp = list_from_equation(equation);
 
         matrix.push(temp.slice(0, num));
         constants.push(temp[num]);
+        console.log(matrix)
     }
 
-    let a = solver(matrix);
+
+    var a = solver(matrix);
+
+    console.log(matrix , a);
 
     answers = [];
 
-    for (let i = 0; i < num; i++)
-    {
-        let temp = [];
-        for (let i = 0; i < num; i++) temp.push(matrix[i]);
+    let i = 0;
+
+    let interval = setInterval(() => {
+
+        const temp = matrix.slice(0);
+
+        matrix.forEach(e => {
+            temp.push(e);
+        })
 
         for (let j = 0; j < num; j++) temp[j][i] = constants[j];
 
-        let curr = solver(temp);
-        console.log(curr);
+        answers.push(solver(temp) / a);
 
-        answers.push(curr / a);
+        console.log(temp, matrix);
 
-    }
+        i++;
+
+        if (i >= num) clearInterval(interval);
+
+    }, 10);
 
     for (let i = 0; i < num; i++) answers[i] = (Math.round(answers[i]*100) / 100);
 
@@ -165,8 +179,11 @@ document.querySelector(".solve-btn").addEventListener('click', function()
 // console.log(solver(a), solver(b))
 
 // ================================= First page ==========================
+
+// selecting all the options on the navbar
 let options = document.querySelectorAll(".calc-opt");
 
+// Iterating over all the options and adding click eventlistener to it
 options.forEach((element, index) => {
     element.addEventListener('click', function(){
         options.forEach((e, i) => {
@@ -182,6 +199,7 @@ options.forEach((element, index) => {
 
 });
 
+// Adding event listener in hamburger menu
 document.querySelector(".hamburger").addEventListener('click', function(){
 
     options.forEach(e => {
@@ -190,6 +208,7 @@ document.querySelector(".hamburger").addEventListener('click', function(){
     })
 })
 
+// Adding event listener in window to caputre resize
 if (window.outerWidth <= 768)
     {
         options.forEach(e => {
@@ -225,4 +244,32 @@ window.addEventListener("resize", function(){
             e.classList.remove("hide");
         })
     }
+})
+
+// Eventlisterner on buttons to capture the click event
+let num_keys = document.querySelectorAll(".numpad > .row > div");
+const curr_screen = document.querySelector(".eq");
+const ans_screen = document.querySelector(".ans_display");
+
+num_keys.forEach(element => {
+    element.addEventListener("click", function(){
+
+        // console.log(element.innerText);
+
+        switch (element.innerText) {
+            case 'C':
+                curr_screen.innerText = '0';
+                ans_screen.innerText = '0';
+                break;
+            case '=':
+                let equation = curr_screen.innerText;
+                equation = equation.replace(/x/g, '*');
+                ans_screen.innerText = eval(equation);
+                break;
+            default:
+                if (curr_screen.innerText === '0') curr_screen.innerText = element.innerText;
+                else curr_screen.innerText += element.innerText;
+                break;
+        }
+    })
 })
