@@ -6,9 +6,9 @@ This is a basic project made using html, css, js and bootstrap.
 
 ### Screenshots
 <p floa="left">
-<img src="images/Screenshot_1.png" alt="Image1" width="33.33%">
-<img src="images/Screenshot_2.png" alt="Image2" width="33.33%">
-<img src="images/Screenshot_3.png" alt="Image3" width="33.33%">
+<img src="images/Screenshot_1.png" alt="Image1" width="30%">
+<img src="images/Screenshot_2.png" alt="Image2" width="30%">
+<img src="images/Screenshot_3.png" alt="Image3" width="30%">
 </p>
 
 ### Functions
