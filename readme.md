@@ -4,9 +4,9 @@ This is a basic project made using html, css, js and bootstrap.
 ### visit website
 [click here](https://rishikesh-kumar-7258.github.io/calculator/)
 
-![Image](images/Screenshot_1.png)
-![Image](images/Screenshot_2.png)
-![Image](images/Screenshot_3.png)
+<img src="images/screenshot_1.png" alt="Image1" width="33.3333%"/>
+<img src="images/screenshot_2.png" alt="Image1" width="33.3333%"/>
+<img src="images/screenshot_3.png" alt="Image1" width="33.3333%"/>
 
 ### Functions
 * Simple calculation
