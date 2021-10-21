@@ -85,14 +85,21 @@
     <div class="container equation-solver c2 hide mt-5 pt-4 bg-dark pb-5 text-white">
         <div class="row mt-5">
             <div class="mb-3 col-md-3 col-sm-6">
-                <label for="variables" class="form-label">Enter variable count</label>
+                <label for="variables" class="form-label">Enter number of variables</label>
                 <input type="number" class="form-control" id="variables" min="2">
             </div>
             <div class="col-md-3 col-sm-6 align-self-center">
                 <button class="btn btn-success ok-btn">confirm</button>
             </div>
-            <div class="row-12">
-                <div class="fs-5 text-muted text-center">convert the equations int the form of ax + by + cz = d</div>
+            <div class="col-12">
+                <div class="fs-5">Enter your equations <span class="fas fa-question help" title="click me to see instructions"></span></div>
+                <div class="instructions hide rounded">
+                    <ul class="list-group">
+                        <li class="list-group-item  bg-dark text-white shadow-lg">Enter the equations in the form of ax + by + cz = d</li>
+                        <li class="list-group-item  bg-dark text-white shadow-lg">If the equation contains terms like x + y then enter your equations as 1x + 1y.</li>
+                        <li class="list-group-item  bg-dark text-white shadow-lg">If the equation is of 3 variables and one term is missing then enter as 2x + 0y + 3z = 5</li>
+                    </ul>
+                </div>
             </div>
             <div class="col-12 input-equations">
                 <input type="text" class="form-control" id="equation1" placeholder="equation1">

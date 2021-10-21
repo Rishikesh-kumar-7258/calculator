@@ -153,22 +153,10 @@ document.querySelector(".solve-btn").addEventListener('click', function()
 
 })
 
-// 3x + 1y + 2z = 3
-// 2x - 3y - 1z = -3
-// 1x + 2y + 1z = 4
-// 1 2 -1
-
-// let a = [   [3, 1, 2],
-//             [2, -3, -1],
-//             [1, 2, 1],
-//         ];
-
-// let b = [   [3, 1, 2],
-//             [-3, -3, -1],
-//             [4, 2, 1],
-//         ];
-
-// console.log(solver(a), solver(b))
+document.querySelector(".help").addEventListener("click", function()
+{
+    document.querySelector(".instructions").classList.toggle('hide');
+})
 
 // ================================= First page ==========================
 
