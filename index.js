@@ -123,37 +123,29 @@ document.querySelector(".solve-btn").addEventListener('click', function()
 
         matrix.push(temp.slice(0, num));
         constants.push(temp[num]);
-        console.log(matrix)
     }
 
 
     var a = solver(matrix);
 
-    console.log(matrix , a);
-
-    answers = [];
+    const answers = [];
 
     let i = 0;
 
-    let interval = setInterval(() => {
+    for (let i = 0; i < num; i++){
 
-        const temp = matrix.slice(0);
+        const temp = [];
 
-        matrix.forEach(e => {
-            temp.push(e);
+        matrix.forEach(element => {
+
+            temp.push(element.slice(0));
         })
 
         for (let j = 0; j < num; j++) temp[j][i] = constants[j];
 
         answers.push(solver(temp) / a);
 
-        console.log(temp, matrix);
-
-        i++;
-
-        if (i >= num) clearInterval(interval);
-
-    }, 10);
+    };
 
     for (let i = 0; i < num; i++) answers[i] = (Math.round(answers[i]*100) / 100);
 
