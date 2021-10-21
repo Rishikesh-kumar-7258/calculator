@@ -276,3 +276,32 @@ num_keys.forEach(element => {
         }
     })
 })
+
+// ======================== Currency Exchange ========================
+// api link http://data.fixer.io/api/latest?access_key=af387b3a5fa22ddbe503371b8632f81a
+
+fetch("http://data.fixer.io/api/latest?access_key=af387b3a5fa22ddbe503371b8632f81a").then(response => {
+    return response.json();
+}).then((data) => {
+    console.log(data.base);
+
+    let rates = data.rates;
+
+    Object.entries(rates).forEach(([key, value]) => {
+        let option = `<option value="${value}">${key}</option>`;
+
+        let currency = document.querySelectorAll(".currency");
+        currency.forEach(element => {
+            element.innerHTML += option;
+        })
+    });
+})
+
+document.querySelector(".converter").addEventListener("click", function(){
+    let from = document.querySelector("#currency1").value;
+    let to = document.querySelector("#currency2").value;
+
+    let ans = (to * document.querySelector(".currency-to-convert").value) / from;
+
+    document.querySelector(".currency-converted").value = ans;
+})
