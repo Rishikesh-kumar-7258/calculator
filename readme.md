@@ -5,7 +5,11 @@ This is a basic project made using html, css, js and bootstrap.
 [click here](https://rishikesh-kumar-7258.github.io/calculator/)
 
 ### Screenshots
-![Image1](images/Screenshot_1.png) ![Image2](images/Screenshot_2.png) ![Image3](images/Screenshot_3.png)
+<p floa="left">
+<img src="images/Screenshot_1.png" alt="Image1" width="33.33%">
+<img src="images/Screenshot_2.png" alt="Image2" width="33.33%">
+<img src="images/Screenshot_3.png" alt="Image3" width="33.33%">
+</p>
 
 ### Functions
 * Simple calculation
