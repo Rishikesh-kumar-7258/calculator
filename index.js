@@ -303,3 +303,9 @@ document.querySelector(".converter").addEventListener("click", function(){
 
     document.querySelector(".currency-converted").value = ans;
 })
+
+// ============================= Graph Plotter =======================
+var b = JXG.JSXGraph.initBoard('jxgbox', {boundingbox: [-5, 2, 5, -2]});
+var p1 = b.create('point',[-1,1], {name:'A',size:0});
+var p2 = b.create('point',[2,-1], {name:'B',size:0});
+var li = b.create('line',["A","B"], {strokeColor:'#00ff00',strokeWidth:2});

@@ -65,6 +65,13 @@ body{
     color : goldenrod;
 }
 
+/* ====================== Unit converter ===================== */
+.unit-types{
+    border : 1px solid goldenrod;
+    text-align: center;
+    color : goldenrod;
+}
+/* ============================ common for all ======================= */
 @media (max-width : 768px)
 {
     #calc-nav{

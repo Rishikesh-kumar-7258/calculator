@@ -5,10 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- favicon image  -->
     <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+
+    <!-- bootstrap css  -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- fontawesome  -->
     <script src="https://kit.fontawesome.com/d59016f14e.js" crossorigin="anonymous"></script>
+
+    <!-- graph plotting jxsgraph  -->
+    <script type="text/javascript" charset="UTF-8"
+        src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
     <link rel="stylesheet" href="index.css">
     <title>Calculator</title>
 </head>
@@ -21,8 +32,9 @@
             <div class="hamburger"><span class="fas fa-bars fs-4"></span> <span class="ham-info">Calculator</span></div>
             <div class="col-3 active fw-bolder calc-opt">Calculator</div>
             <div class="col-3 fw-bolder calc-opt">Solve Equation</div>
+            <div class="col-3 fw-bolder calc-opt">Graph Plotting</div>
             <div class="col-3 fw-bolder calc-opt">Exchange Rate</div>
-            <div class="col-3 fw-bolder calc-opt">Unit Converter</div>
+            <!-- <div class="col-3 fw-bolder calc-opt">Unit Converter</div> -->
         </div>
     </div>
 
@@ -120,8 +132,22 @@
         </div>
     </div>
 
-    <!-- exchange rate  -->
+    <!-- Mathematical graph  -->
     <div class="container c3 hide mt-5 pt-4 bg-dark pb-5">
+        <div class="row mt-5">
+            <div class="mb-3 col-12">
+                <label for="graph-equation" class="form-label text-white">Enter your equation here</label>
+                <input type="text" class="form-control" id="graph-equation" name="graph-equation">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">Graph</div>
+            <div id="jxgbox" class="jxgbox col-12" style="height:300px;"></div>
+        </div>
+    </div>
+
+    <!-- exchange rate  -->
+    <div class="container c4 hide mt-5 pt-4 bg-dark pb-5">
         <div class="row pt-5">
             <div class="col-12 col-md-4 text-white">From</div>
             <input type="number" class="col-6 col-md-4 currency-to-convert" value="0">
@@ -141,12 +167,24 @@
             </div>
         </div>
         <div class="row mt-5 justify-content-center">
-                <div class="btn btn-success converter col-8 fw-bolder">Convert</div>
+            <div class="btn btn-success converter col-8 fw-bolder">Convert</div>
         </div>
     </div>
 
     <!-- unit converter  -->
-    <div class="container c4 hide mt-5 pt-4 bg-dark pb-5"></div>
+    <div class="container c5 hide mt-5 pt-4 bg-dark pb-5">
+        <div class="row mt-5">
+            <div class="col-6 col-md-4 p-5 unit-types"><span class="fas fw-bolder fs-4 fa-ruler-horizontal">
+                    Length</span></div>
+            <div class="col-6 col-md-4 p-5 unit-types"><span class="fas fw-bolder fs-4 fa-balance-scale"> Mass</span>
+            </div>
+            <div class="col-6 col-md-4 p-5 unit-types"><span class="fas fw-bolder fs-4 fa-cube"> Volume</span></div>
+            <div class="col-6 col-md-4 p-5 unit-types"><span class="fas fw-bolder fs-4 fa-square"> Area</span></div>
+            <div class="col-6 col-md-4 p-5 unit-types"><span class="fas fw-bolder fs-4 fa-tachometer-alt"> speed</span>
+            </div>
+            <div class="col-6 col-md-4 p-5 unit-types"><span class="fas fw-bolder fs-4 fa-clock"> Time</span></div>
+        </div>
+    </div>
 </body>
 <script src="index.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
