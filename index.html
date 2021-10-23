@@ -134,15 +134,17 @@
 
     <!-- Mathematical graph  -->
     <div class="container c3 hide mt-5 pt-4 bg-dark pb-5">
-        <div class="row mt-5">
-            <div class="mb-3 col-12">
+        <div class="row mt-5 justify-content-center">
+            <div class="mb-3 col-12 col-md-6">
                 <label for="graph-equation" class="form-label text-white">Enter your equation here</label>
                 <input type="text" class="form-control" id="graph-equation" name="graph-equation">
             </div>
+            <button class="col-8 col-md-6 align-self-center btn btn-success">Plot Graph</button>
         </div>
         <div class="row">
-            <div class="col-12">Graph</div>
-            <div id="jxgbox" class="jxgbox col-12" style="height:300px;"></div>
+            <div class="col-12 text-white">Graph</div>
+            <div class="col-12 text-center graph-equation-name">Y = </div>
+            <div id="graph-space" class="graph-space col-12"></div>
         </div>
     </div>
 
