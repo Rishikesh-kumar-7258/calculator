@@ -307,3 +307,7 @@ document.querySelector(".converter").addEventListener("click", function(){
 // ============================= Graph Plotter =======================
 const equation;
 
+document.querySelector(".plot-btn").addEventListener("click", function(){
+
+    equation = document.querySelector(".graph-equation").input;
+})
