@@ -72,10 +72,29 @@ body{
     color : goldenrod;
 }
 /* ============================ Graph Plotting ======================= */
-.graph-space{
+#graph-space{
     background : white;
     height : 300px;
+    display : grid;
+    place-items: center;
+    background : lightgoldenrodyellow;
+    position : relative;
 }
+hr{
+    padding : 2px;
+    background : red;
+    position: absolute;
+}
+
+#x-axis
+{
+    width : 100%;
+}
+#y-axis
+{
+    height : 100%;
+}
+
 /* ============================ common for all ======================= */
 @media (max-width : 768px)
 {

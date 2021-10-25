@@ -305,9 +305,9 @@ document.querySelector(".converter").addEventListener("click", function(){
 })
 
 // ============================= Graph Plotter =======================
-const equation;
 
-document.querySelector(".plot-btn").addEventListener("click", function(){
+var width , height;
 
-    equation = document.querySelector(".graph-equation").input;
-})
+let graphArea = document.querySelector("#graph-space");
+// const ORIGIN = (parseFloat(graphArea.width) / 2, parseFloat(graphArea.height)/2);
+console.log(graphArea.style.width);
