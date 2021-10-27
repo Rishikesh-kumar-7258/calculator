@@ -307,7 +307,8 @@ document.querySelector(".converter").addEventListener("click", function(){
 // ============================= Graph Plotter =======================
 
 var width , height;
+const equation = "5x+7";
 
 let graphArea = document.querySelector("#graph-space");
 // const ORIGIN = (parseFloat(graphArea.width) / 2, parseFloat(graphArea.height)/2);
-console.log(graphArea.style.width);
+console.log(graphArea.innerWidth);
