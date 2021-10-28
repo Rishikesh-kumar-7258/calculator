@@ -310,5 +310,15 @@ var width , height;
 const equation = "5x+7";
 
 let graphArea = document.querySelector("#graph-space");
+let graphrect = graphArea.getBoundingClientRect();
+const ORIGIN = {
+    // 'x' : parseFloat(getComputedStyle(graphArea).width) / 2,
+    // 'y' : parseFloat(getComputedStyle(graphArea).height) / 2
+    'x' : graphrect.width,
+    'y' : graphrect.height
+}
+let x_axis = document.querySelector("#x-axis");
+let y_axis = document.querySelector("#y-axis");
 // const ORIGIN = (parseFloat(graphArea.width) / 2, parseFloat(graphArea.height)/2);
-console.log(graphArea.innerWidth);
+// console.log(x_axis.offsetWidth, x_axis.clientWidth);
+console.log(ORIGIN);
