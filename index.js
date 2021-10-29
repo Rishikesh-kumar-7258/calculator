@@ -306,19 +306,44 @@ document.querySelector(".converter").addEventListener("click", function(){
 
 // ============================= Graph Plotter =======================
 
-var width , height;
-const equation = "5x+7";
+var equation = "5x+7";
 
-let graphArea = document.querySelector("#graph-space");
-let graphrect = graphArea.getBoundingClientRect();
-const ORIGIN = {
-    // 'x' : parseFloat(getComputedStyle(graphArea).width) / 2,
-    // 'y' : parseFloat(getComputedStyle(graphArea).height) / 2
-    'x' : graphrect.width,
-    'y' : graphrect.height
+let canvas =document.querySelector("#graph-space");
+let ctx = canvas.getContext("2d");
+
+let width = canvas.width;
+let height = canvas.height;
+let ORIGIN_x = width / 2;
+let ORIGIN_y = height / 2;
+
+// draw a line using canvas
+function drawLine(x1, y1, x2, y2) {
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
 }
-let x_axis = document.querySelector("#x-axis");
-let y_axis = document.querySelector("#y-axis");
-// const ORIGIN = (parseFloat(graphArea.width) / 2, parseFloat(graphArea.height)/2);
-// console.log(x_axis.offsetWidth, x_axis.clientWidth);
-console.log(ORIGIN);
+
+// draw a point using canvas
+function drawCircle(x,y,r,st, en)
+{
+    ctx.beginPath();
+    ctx.arc(x, y, r, st, en);
+    ctx.stroke();
+}
+
+// Drawing our axes
+drawLine(0, ORIGIN_y, width, ORIGIN_y);
+drawLine(ORIGIN_x, 0, ORIGIN_x, height);
+
+// drawing points on axes
+function drawPoints(space)
+{
+    let i = 0;
+    while (ORIGIN_x + i*space < width)
+    {
+        drawCircle(ORIGIN_y, ORIGIN_x + i*space, 5, 0, 2*Math.PI);
+    }
+}
+
+drawPoints(5);
