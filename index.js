@@ -1,7 +1,6 @@
 // ========================== Equation solver =========================
 // function to solve the matrix
-function solver(arr)
-{
+function solver(arr) {
     // size of the square matrix
     let n = arr.length;
 
@@ -10,22 +9,20 @@ function solver(arr)
 
     // // checking if it is not an empty matrix
     // assert(n >= 1);
-    
+
     // If the size of matrix is 1 return the only element
     if (n === 1) return arr[0][0];
 
     // If the size of matrix is 2 return according to the formula
-    if (n === 2)
-    {
-        return (arr[0][0]*arr[1][1] - arr[1][0]*arr[0][1]);
+    if (n === 2) {
+        return (arr[0][0] * arr[1][1] - arr[1][0] * arr[0][1]);
     }
 
     // Initialised ans and assigned to 0
     let ans = 0;
 
     // looping throgh 1 col only
-    for (let i = 0; i< n; i++)
-    {
+    for (let i = 0; i < n; i++) {
         // getting to next iteration if the current element is 0
         if (arr[i][0] === 0) continue;
 
@@ -33,41 +30,36 @@ function solver(arr)
         let temp = [];
 
         // looping through all the rows and columns to make the new matrix
-        for (let r = 0; r < n; r++)
-        {
+        for (let r = 0; r < n; r++) {
             // if the element is present in the current row move ahead
             if (r === i) continue;
 
             let t = [];
-            for (let c = 1; c < n; c++)
-            {
+            for (let c = 1; c < n; c++) {
                 t.push(arr[r][c]);
             }
 
             temp.push(t);
         }
 
-        ans += arr[i][0]*solver(temp)*Math.pow(-1, i);
+        ans += arr[i][0] * solver(temp) * Math.pow(-1, i);
     }
 
     return ans;
 }
 
 // function to convert a equation into an array of constants
-function list_from_equation(equation)
-{
+function list_from_equation(equation) {
     let ans = [];
 
     let v = "";
     let i = -1;
-    while (equation[++i] !== '=')
-    {
+    while (equation[++i] !== '=') {
         if (equation[i] === ' ') continue;
 
         v += equation[i];
 
-        if (equation[i] === '+' || equation[i] === '-') 
-        {
+        if (equation[i] === '+' || equation[i] === '-') {
             if (v.length === 1) ans.push(1);
             else ans.push(parseFloat(v));
             v = equation[i];
@@ -78,8 +70,7 @@ function list_from_equation(equation)
     ans.push(parseFloat(v));
     v = "";
 
-    while (++i < equation.length)
-    {
+    while (++i < equation.length) {
         v += equation[i];
     }
     ans.push(parseFloat(v));
@@ -91,33 +82,30 @@ function list_from_equation(equation)
 // number of variables
 let num = 2
 
-document.querySelector(".ok-btn").addEventListener("click", function(){
+document.querySelector(".ok-btn").addEventListener("click", function () {
 
     num = document.querySelector("#variables").value;
     document.querySelector("#variables").value = "";
 
     document.querySelector(".input-equations").innerHTML = "";
 
-    for (let i = 0; i < num; i++)
-    {
+    for (let i = 0; i < num; i++) {
         let input = document.createElement("input")
         input.type = "text";
         input.classList.add("form-control");
         input.classList.add("my-2");
-        input.placeholder = `equation${i+1}`;
-        input.id = `equation${i+1}`;
+        input.placeholder = `equation${i + 1}`;
+        input.id = `equation${i + 1}`;
         document.querySelector(".input-equations").appendChild(input);
     }
 })
 
-document.querySelector(".solve-btn").addEventListener('click', function()
-{
+document.querySelector(".solve-btn").addEventListener('click', function () {
     const matrix = [];
     const constants = [];
-    
-    for (let i = 0; i < num; i++)
-    {
-        let equation = document.querySelector(`#equation${i+1}`).value;
+
+    for (let i = 0; i < num; i++) {
+        let equation = document.querySelector(`#equation${i + 1}`).value;
         if (equation.length === 0) return;
         let temp = list_from_equation(equation);
 
@@ -132,7 +120,7 @@ document.querySelector(".solve-btn").addEventListener('click', function()
 
     let i = 0;
 
-    for (let i = 0; i < num; i++){
+    for (let i = 0; i < num; i++) {
 
         const temp = [];
 
@@ -147,14 +135,13 @@ document.querySelector(".solve-btn").addEventListener('click', function()
 
     };
 
-    for (let i = 0; i < num; i++) answers[i] = (Math.round(answers[i]*100) / 100);
+    for (let i = 0; i < num; i++) answers[i] = (Math.round(answers[i] * 100) / 100);
 
     document.querySelector(".answer").innerText = answers;
 
 })
 
-document.querySelector(".help").addEventListener("click", function()
-{
+document.querySelector(".help").addEventListener("click", function () {
     document.querySelector(".instructions").classList.toggle('hide');
 })
 
@@ -165,61 +152,55 @@ let options = document.querySelectorAll(".calc-opt");
 
 // Iterating over all the options and adding click eventlistener to it
 options.forEach((element, index) => {
-    element.addEventListener('click', function(){
+    element.addEventListener('click', function () {
         options.forEach((e, i) => {
             e.classList.remove('active');
 
-            document.querySelector(`.c${i+1}`).classList.add("hide");
+            document.querySelector(`.c${i + 1}`).classList.add("hide");
         })
 
         element.classList.add('active');
-        document.querySelector(`.c${index+1}`).classList.remove("hide");
+        document.querySelector(`.c${index + 1}`).classList.remove("hide");
         document.querySelector(".ham-info").innerText = element.innerText;
     })
 
 });
 
 // Adding event listener in hamburger menu
-document.querySelector(".hamburger").addEventListener('click', function(){
+document.querySelector(".hamburger").addEventListener('click', function () {
 
     options.forEach(e => {
-        
+
         e.classList.toggle('hide');
     })
 })
 
 // Adding event listener in window to caputre resize
-if (window.outerWidth <= 768)
-    {
+if (window.outerWidth <= 768) {
+    options.forEach(e => {
+        if (!e.classList.contains("hide")) {
+            e.classList.add("hide");
+        }
+    })
+}
+
+if (window.outerWidth > 768) {
+    options.forEach(e => {
+        e.classList.remove("hide");
+    })
+}
+
+window.addEventListener("resize", function () {
+
+    if (this.outerWidth <= 768) {
         options.forEach(e => {
-            if (!e.classList.contains("hide"))
-            {
+            if (!e.classList.contains("hide")) {
                 e.classList.add("hide");
             }
         })
     }
 
-    if (window.outerWidth > 768)
-    {
-        options.forEach(e => {
-            e.classList.remove("hide");
-        })
-    }
-
-window.addEventListener("resize", function(){
-
-    if (this.outerWidth <= 768)
-    {
-        options.forEach(e => {
-            if (!e.classList.contains("hide"))
-            {
-                e.classList.add("hide");
-            }
-        })
-    }
-
-    if (this.outerWidth > 768)
-    {
+    if (this.outerWidth > 768) {
         options.forEach(e => {
             e.classList.remove("hide");
         })
@@ -232,7 +213,7 @@ const curr_screen = document.querySelector(".eq");
 const ans_screen = document.querySelector(".ans_display");
 
 num_keys.forEach(element => {
-    element.addEventListener("click", function(){
+    element.addEventListener("click", function () {
 
         // console.log(element.innerText);
 
@@ -244,7 +225,7 @@ num_keys.forEach(element => {
             case '=':
                 let equation = curr_screen.innerText;
                 equation = equation.replace(/x/g, '*');
-                ans_screen.innerText = Math.round(eval(equation)*100) / 100;
+                ans_screen.innerText = Math.round(eval(equation) * 100) / 100;
                 break;
             case '':
                 if (curr_screen.innerText.length === 1) curr_screen.innerText = '0';
@@ -255,12 +236,12 @@ num_keys.forEach(element => {
                 curr_screen.innerText += element.innerText;
                 break;
             case '1/x':
-                let ans = 1/parseFloat(curr_screen.innerText);
+                let ans = 1 / parseFloat(curr_screen.innerText);
                 ans_screen.innerText = Math.round(ans * 100) / 100;
                 break;
             case 'x^2':
                 let n = parseFloat(curr_screen.innerText);
-                ans_screen.innerText = n*n;
+                ans_screen.innerText = n * n;
                 break;
             case 'sqrt':
                 ans_screen.innerText = Math.sqrt(parseFloat(curr_screen.innerText));
@@ -295,7 +276,7 @@ fetch("http://data.fixer.io/api/latest?access_key=af387b3a5fa22ddbe503371b8632f8
     });
 })
 
-document.querySelector(".converter").addEventListener("click", function(){
+document.querySelector(".converter").addEventListener("click", function () {
     let from = document.querySelector("#currency1").value;
     let to = document.querySelector("#currency2").value;
 
@@ -306,44 +287,36 @@ document.querySelector(".converter").addEventListener("click", function(){
 
 // ============================= Graph Plotter =======================
 
-var equation = "5x+7";
 
-let canvas =document.querySelector("#graph-space");
-let ctx = canvas.getContext("2d");
+function draw() {
+    try {
+        // compile the expression once
+        const expression = document.getElementById('eq').value
+        const expr = math.compile(expression)
 
-let width = canvas.width;
-let height = canvas.height;
-let ORIGIN_x = width / 2;
-let ORIGIN_y = height / 2;
+        // evaluate the expression repeatedly for different values of x
+        const xValues = math.range(-10, 10, 0.5).toArray()
+        const yValues = xValues.map(function (x) {
+            return expr.evaluate({ x: x })
+        })
 
-// draw a line using canvas
-function drawLine(x1, y1, x2, y2) {
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
-}
-
-// draw a point using canvas
-function drawCircle(x,y,r,st, en)
-{
-    ctx.beginPath();
-    ctx.arc(x, y, r, st, en);
-    ctx.stroke();
-}
-
-// Drawing our axes
-drawLine(0, ORIGIN_y, width, ORIGIN_y);
-drawLine(ORIGIN_x, 0, ORIGIN_x, height);
-
-// drawing points on axes
-function drawPoints(space)
-{
-    let i = 0;
-    while (ORIGIN_x + i*space < width)
-    {
-        drawCircle(ORIGIN_y, ORIGIN_x + i*space, 5, 0, 2*Math.PI);
+        // render the plot using plotly
+        const trace1 = {
+            x: xValues,
+            y: yValues,
+            type: 'scatter'
+        }
+        const data = [trace1]
+        Plotly.newPlot('plot', data)
+    }
+    catch (err) {
+        let error = err;
     }
 }
 
-drawPoints(5);
+document.getElementById('form').onsubmit = function (event) {
+    event.preventDefault()
+    draw()
+}
+
+draw()
