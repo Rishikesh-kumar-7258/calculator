@@ -9,9 +9,12 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
+  Alert,
+  AlertTitle,
 } from "@mui/material";
 import React from "react";
 import matrix from "matrix-js";
+import { Snackbar } from "@mui/material";
 
 const EquationSolver = () => {
   const [equation, setEquation] = React.useState("");
@@ -19,25 +22,43 @@ const EquationSolver = () => {
   const [open, setOpen] = React.useState(false);
   const [result, setResult] = React.useState("");
   const [showSolutionBtn, setShowSolutionBtn] = React.useState(true);
+  const [showAlert, setShowAlert] = React.useState(false);
+  const [alertTitle, setAlertTitle] = React.useState("");
+  const [alertText, setAlertText] = React.useState("");
+  const [alertType, setAlertType] = React.useState("");
 
   const handleClose = () => {
+    navigator.clipboard.writeText(result);
     setOpen(false);
   };
   const handleOpen = () => {
     setOpen(true);
   };
 
+  const handleAlertClose = () => {
+    setShowAlert(false);
+    setAlertTitle("");
+    setAlertText("");
+    setAlertType("");
+  };
+
   // function to solve the equation
   const solveEquation = () => {
     // check if the equation is empty
     if (equation === "") {
-      alert("Please enter an equation");
+      setAlertTitle("Empty Equation");
+      setAlertText("Enter your equations");
+      setShowAlert(true);
+      setAlertType("error");
       return;
     }
 
     // check if the variables are empty
     if (variables === "") {
-      alert("Please enter variables");
+      setAlertTitle("Empty Variables");
+      setAlertText("Enter your variables");
+      setShowAlert(true);
+      setAlertType("error");
       return;
     }
 
@@ -49,7 +70,10 @@ const EquationSolver = () => {
 
     // checking if we have enough equations
     if (equationArray.length !== variableArray.length) {
-      alert("Please enter equal number of equations and variables");
+      setAlertTitle("Wrong Input");
+      setAlertText("Enter equal number of variables and equations");
+      setShowAlert(true);
+      setAlertType("error");
       return;
     }
 
@@ -80,18 +104,25 @@ const EquationSolver = () => {
       variableArray
     );
 
-    if (solution === "No Solution") {
-      alert("No Solution");
+    if (solution === null) {
+      setAlertText("No solution for this equation");
+      setShowAlert(true);
+      setAlertType("error");
       return;
     }
 
     let tempResult = "";
     for (let i = 0; i < variableArray.length; i++) {
-      tempResult += `${variableArray[i]} = ${solution[i]}`;
+      tempResult += `${variableArray[i]} = ${solution[i]}   ,`;
     }
 
     setResult(tempResult);
     setShowSolutionBtn(false);
+
+    setAlertText("Solved");
+    setShowAlert(true);
+    setAlertType("success");
+    return;
   };
 
   const cleanEquation = (equation, variables) => {
@@ -137,7 +168,7 @@ const EquationSolver = () => {
 
     const delta = coefficientMatrix.det();
     if (delta === 0) {
-      return "No Solution";
+      return null;
     }
 
     let solution = [];
@@ -170,10 +201,26 @@ const EquationSolver = () => {
           value={variables}
           onChange={(e) => setVariables(e.target.value)}
         />
-        <ButtonGroup variant="contained" size="large" fullWidth>
+        <ButtonGroup
+          variant="contained"
+          size="large"
+          fullWidth
+          disableElevation
+          orientation="vertical"
+        >
           <Button onClick={solveEquation}>Solve</Button>
           <Button onClick={handleOpen} disabled={showSolutionBtn}>
-            Solution
+            View
+          </Button>
+          <Button
+            onClick={() => {
+              setEquation("");
+              setVariables("");
+              setResult("");
+              setShowSolutionBtn(true);
+            }}
+          >
+            Clear
           </Button>
         </ButtonGroup>
       </Stack>
@@ -184,11 +231,23 @@ const EquationSolver = () => {
           <Button onClick={handleClose} color="success">
             Copy
           </Button>
-          <Button onClick={handleClose} color="success">
-            Close
-          </Button>
         </DialogActions>
       </Dialog>
+      <Snackbar
+        open={showAlert}
+        autoHideDuration={6000}
+        onClose={handleAlertClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          severity={alertType === "" ? "error" : alertType}
+          variant="filled"
+          onClose={handleAlertClose}
+        >
+          <AlertTitle>{alertTitle}</AlertTitle>
+          {alertText}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
