@@ -5,6 +5,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@emotion/react";
 import EquationSolver from "./components/equation";
+import Basic from "./components/basic";
 
 const theme = createTheme({
   palette: {
@@ -46,7 +47,9 @@ function App() {
               <Tab label="Unit Converter" value="3" />
             </TabList>
           </Box>
-          <TabPanel value="1">Item One</TabPanel>
+          <TabPanel value="1">
+            <Basic />
+          </TabPanel>
           <TabPanel value="2">
             <EquationSolver />
           </TabPanel>
