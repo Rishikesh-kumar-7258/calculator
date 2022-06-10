@@ -4,6 +4,11 @@ import {
   TextareaAutosize,
   Button,
   TextField,
+  ButtonGroup,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import React from "react";
 import matrix from "matrix-js";
@@ -11,14 +16,42 @@ import matrix from "matrix-js";
 const EquationSolver = () => {
   const [equation, setEquation] = React.useState("");
   const [variables, setVariables] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const [result, setResult] = React.useState("");
+  const [showSolutionBtn, setShowSolutionBtn] = React.useState(true);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   // function to solve the equation
   const solveEquation = () => {
+    // check if the equation is empty
+    if (equation === "") {
+      alert("Please enter an equation");
+      return;
+    }
+
+    // check if the variables are empty
+    if (variables === "") {
+      alert("Please enter variables");
+      return;
+    }
+
     // Extracting individual equations and varaibles
     let equationArray = equation.split("\n");
     let variableArray = variables.split(",");
     let constantArray = [];
     let coefficientMatrix = [];
+
+    // checking if we have enough equations
+    if (equationArray.length !== variableArray.length) {
+      alert("Please enter equal number of equations and variables");
+      return;
+    }
 
     for (let i = 0; i < equationArray.length; i++) {
       let equation = equationArray[i];
@@ -41,7 +74,24 @@ const EquationSolver = () => {
       return temp;
     });
 
-    console.log(getSolution(coefficientMatrix, constantArray, variableArray));
+    const solution = getSolution(
+      coefficientMatrix,
+      constantArray,
+      variableArray
+    );
+
+    if (solution === "No Solution") {
+      alert("No Solution");
+      return;
+    }
+
+    let tempResult = "";
+    for (let i = 0; i < variableArray.length; i++) {
+      tempResult += `${variableArray[i]} = ${solution[i]}`;
+    }
+
+    setResult(tempResult);
+    setShowSolutionBtn(false);
   };
 
   const cleanEquation = (equation, variables) => {
@@ -97,8 +147,6 @@ const EquationSolver = () => {
         temp = matrix(temp.set(j, i).to(constantArray[j][0]));
       }
 
-      console.log(temp());
-
       solution.push(temp.det() / delta);
     }
 
@@ -122,10 +170,25 @@ const EquationSolver = () => {
           value={variables}
           onChange={(e) => setVariables(e.target.value)}
         />
-        <Button variant="contained" size="large" onClick={solveEquation}>
-          Solve
-        </Button>
+        <ButtonGroup variant="contained" size="large" fullWidth>
+          <Button onClick={solveEquation}>Solve</Button>
+          <Button onClick={handleOpen} disabled={showSolutionBtn}>
+            Solution
+          </Button>
+        </ButtonGroup>
       </Stack>
+      <Dialog open={open} keepMounted onClose={handleClose}>
+        <DialogTitle>Solution</DialogTitle>
+        <DialogContent>{result}</DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="success">
+            Copy
+          </Button>
+          <Button onClick={handleClose} color="success">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
