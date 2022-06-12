@@ -6,12 +6,13 @@ import {
   Stack,
   TextField,
   Button,
-  Typography,
   FormControl,
+  InputAdornment,
 } from "@mui/material";
 
 const Basic = () => {
   const [equation, setEquation] = React.useState("");
+  const [solution, setSolution] = React.useState("");
   const numpads = [
     "%",
     "CE",
@@ -24,7 +25,7 @@ const Basic = () => {
     "7",
     "8",
     "9",
-    "X",
+    "x",
     "4",
     "5",
     "6",
@@ -38,6 +39,43 @@ const Basic = () => {
     ".",
     "=",
   ];
+
+  const handleButtonClick = (e) => {
+    console.log(e.target.innerText);
+
+    const currentTarget = e.target.innerText;
+
+    if (currentTarget === "DEL") {
+      setEquation((prev) => {
+        if (prev.length === 0) {
+          return "";
+        } else {
+          return prev.substring(0, prev.length - 1);
+        }
+      });
+    } else if (
+      isNumber(currentTarget) ||
+      currentTarget === "." ||
+      currentTarget === "+" ||
+      currentTarget === "-" ||
+      currentTarget === "X" ||
+      currentTarget === "/"
+    ) {
+      setEquation((prev) => {
+        prev += currentTarget.toLowerCase();
+        return prev;
+      });
+    } else if (currentTarget === "C") {
+      setEquation("");
+      setSolution("");
+    } else if (currentTarget === "+/-") {
+    }
+  };
+
+  const isNumber = (num) => {
+    num = parseInt(num);
+    return !isNaN(num);
+  };
 
   return (
     <Container>
@@ -53,17 +91,21 @@ const Basic = () => {
       >
         <FormControl fullWidth sx={{ display: "flex", flexDirection: "row" }}>
           <TextField
-            label="0"
             disabled
-            value={equation}
+            label={equation}
             variant="filled"
             fullWidth
+            placeholder="0"
           />
           <TextField
-            label="ans"
             variant="filled"
             disabled
             fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">=</InputAdornment>
+              ),
+            }}
           ></TextField>
         </FormControl>
         <Box
@@ -93,12 +135,18 @@ const Basic = () => {
                     sx={{
                       padding: 3,
                       bgcolor: "black",
+                      fontSize: 16,
+                      fontWeight: "bold",
+                      transition: "all 0.1s",
+                      "&:focus": {
+                        transform: "scale(0.95)",
+                      },
                     }}
                     variant="outlined"
+                    onClick={handleButtonClick}
+                    disableRipple
                   >
-                    <Typography variant="h6" color="primary">
-                      {numpad}
-                    </Typography>
+                    {numpad}
                   </Button>
                 </Grid>
               );
